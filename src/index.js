@@ -142,7 +142,10 @@ app.post('/', (req, res)=>{
 
 const start = async() => {
    try {
-   await mongoose.connect(`${CONNECTION}`);
+   await mongoose.connect(`${CONNECTION}`, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
    app.listen( PORT, ()=>{
       console.log("app listening on port " + PORT + " and database connection is a sucess");
