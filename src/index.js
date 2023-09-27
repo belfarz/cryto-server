@@ -6,9 +6,8 @@
  const app = express();
  mongoose.set('strictQuery',false);
 
- if (process.env.NODE_ENV !== "production" ) {
       require("dotenv").config();
- } 
+ 
 
  const CONNECTION = process.env.CONNECTION;
 
