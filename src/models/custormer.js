@@ -1,18 +1,14 @@
 const mongoose = require("mongoose");
 
 const customerSchema = new mongoose.Schema({
-    name: {
+    coinId: {
         type: String,
         required: true
-    },
-    email: String,
-    phone: String,
-    orders:[
-        {
-            description: String,
-            amount: Number
-        }
-    ]
+    }, 
+    address: {
+        type: String,
+        required: true
+    }
 });
 
-module.exports = mongoose.model("staff",customerSchema);
+module.exports = mongoose.model("promote",customerSchema);
