@@ -17,30 +17,7 @@
 
  const PORT = process.env.PORT || 3000;
 
-const customers = [
-   {
-      name:"ezyy",
-      aka:"colos bringer"
-   },
-   {
-      name:"chidi",
-      aka:"mommas boy"   
-   },
-   {
-      name:"ananti",
-      aka:"white eyed ananti" 
-   },
-   {
-      name:"izzu",
-      aka:"sick on colos" 
-   }
-];
 
-const customer = new Customer({
-   name:"john doe",
-   email:"johndoe@example.com",
-   phone:"09123456789"
-});
 
 
 
@@ -165,7 +142,7 @@ app.post('/', (req, res)=>{
 
 const start = async() => {
    try {
-   await mongoose.connect(CONNECTION);
+   await mongoose.connect(`${CONNECTION}`);
 
    app.listen( PORT, ()=>{
       console.log("app listening on port " + PORT + " and database connection is a sucess");
