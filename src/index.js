@@ -1,9 +1,10 @@
  const express = require("express");
  const mongoose = require("mongoose");
  const Customer = require("./models/custormer");
- 
+ const cors = require('cors');
 
  const app = express();
+ app.use(cors());
  mongoose.set('strictQuery',false);
 
  if (process.env.NODE_ENV !== "production" ) {
