@@ -35,7 +35,7 @@ app.get("/api/promoted", async (req, res)=>{
    const data = Customer.find()
    try {
       // console.log(undefinedVariable);
-       res.json(data);
+       res.json(data).lean();
    } catch (error) {
       res.status(404).json({error: error.message}) 
    }
