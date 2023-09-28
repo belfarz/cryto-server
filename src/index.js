@@ -1,5 +1,6 @@
  const express = require("express");
  const mongoose = require("mongoose");
+ const { inspect } = require('util');
  const Customer = require("./models/custormer");
  const cors = require('cors');
 
@@ -32,7 +33,7 @@ app.post('/api/customers', async (req, res)=>{
 });
 
 app.get("/api/promoted", async (req, res)=>{
-   const data = Customer.find()
+   const data = await Customer.find()
    try {
        console.log(data);
        res.json(data);
