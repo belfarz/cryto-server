@@ -22,14 +22,14 @@
 
 app.post('/api/customers', async (req, res)=>{
    console.log(req.body);
-   const duplicate = await Customer.findOne({"coinId":req.body.dataToSend.coinId})
+   const duplicate = await Customer.findOne({"coinId":req.body.coinId})
    if(duplicate){
       res.status(400).json({ message: "Entry already exists." });
    }else{
       const customer = new Customer(req.body);
       try {
          await customer.save();
-         res.status(201).json({message : "Entry have been submitted for review"});
+         res.status(201).json({message : "Entry have been submitted for"});
       } catch (error) {
          res.status(400).json({error: error.message});
       }   
