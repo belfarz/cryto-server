@@ -1,8 +1,9 @@
  const express = require("express");
  const mongoose = require("mongoose");
- const { inspect } = require('util');
  const Customer = require("./models/custormer");
+ const User = require("./models/users")
  const cors = require('cors');
+ const bcrypt = require('bcrypt')
 
  const app = express();
  app.use(cors());
@@ -26,6 +27,43 @@ app.post('/api/customers', async (req, res)=>{
    try {
       await customer.save();
       res.status(201).json({customer});
+   } catch (error) {
+      res.status(400).json({error: error.message});
+   }
+
+});
+
+app.post('/api/login', async (req, res)=>{
+   
+   const {email , password} = req.body
+   const findUser = await User.findOne({ email });
+   console.log(findUser);
+
+   if(findUser == null){
+      return res.status(400).send('Cannot find user')
+   }
+
+   try {
+      if(await bcrypt.compare(password, findUser.password)) {
+         res.send('Success')
+       } else {
+         res.status(401).json({ message: "No user with those credentials found!" });
+       }
+      
+   } catch (error) {
+      res.status(400).json({error: error.message});
+   }
+
+});
+
+app.post('/api/register', async (req, res)=>{
+   
+   try {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10)
+      const newUser = { email: req.body.email, password: hashedPassword }
+      const user = new User(newUser);
+      await user.save();
+      res.status(201).json("Hurray you've been registered!!!!");
    } catch (error) {
       res.status(400).json({error: error.message});
    }
