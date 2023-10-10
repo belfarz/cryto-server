@@ -45,7 +45,10 @@ app.post('/api/login', async (req, res)=>{
 
    try {
       if(await bcrypt.compare(password, findUser.password)) {
-         res.send('Success')
+         res.status(200).json({
+            user: email,
+            token: "Enjoy your pizza, here's your tokens."
+          });
        } else {
          res.status(401).json({ message: "No user with those credentials found!" });
        }
