@@ -2,6 +2,7 @@
  const mongoose = require("mongoose");
  const Customer = require("./models/custormer");
  const User = require("./models/users")
+ const Payed = require("./models/payed")
  const cors = require('cors');
  const bcrypt = require('bcrypt')
 
@@ -27,6 +28,18 @@ app.post('/api/customers', async (req, res)=>{
    try {
       await customer.save();
       res.status(201).json({customer});
+   } catch (error) {
+      res.status(400).json({error: error.message});
+   }
+
+});
+
+app.post('/api/payed', async (req, res)=>{
+   console.log(req.body);
+   const payed = new Payed(req.body);
+   try {
+      await payed.save();
+      res.status(201).json({payed});
    } catch (error) {
       res.status(400).json({error: error.message});
    }
@@ -82,6 +95,17 @@ app.get("/api/promoted", async (req, res)=>{
       res.status(404).json({error: error.message}) 
    }
 })
+
+app.get("/api/payedpromotion", async (req, res)=>{
+   const data = await Payed.find()
+   try {
+       console.log(data);
+       res.json(data);
+   } catch (error) {
+      res.status(404).json({error: error.message}) 
+   }
+})
+
 
 
 app.post('/', (req, res)=>{
