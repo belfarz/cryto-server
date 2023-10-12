@@ -23,9 +23,6 @@
 
  const PORT = process.env.PORT || 3000;
 
- const maxRetries = 5;
-let retryCount = 0;
-
 
 app.post('/api/customers', async (req, res)=>{
    console.log(req.body);
@@ -122,16 +119,8 @@ app.post('/api/coins', async (req, res) => {
 
      res.status(200).json(response.data);
    } catch (error) {
-      if (error.response && error.response.status === 429 && retryCount < maxRetries) {
-         const retryAfter = error.response.headers['retry-after'] || 10;
-         console.log(`Rate limited. Retrying after ${retryAfter} seconds.`);
-         retryCount++;
-         await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
-         return fetchData(cryptoId); // Retry the request
-       } else {
-         console.error(error);
-         throw error;
-       }
+     console.error(error);
+     res.status(500).json({ error: 'Internal Server Error' });
    }
  });
 
