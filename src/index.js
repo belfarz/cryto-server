@@ -91,7 +91,7 @@ app.post('/api/register', async (req, res)=>{
 app.get("/api/promoted", async (req, res)=>{
    const data = await Customer.find()
    try {
-       console.log(data);
+       
        res.json(data);
    } catch (error) {
       res.status(404).json({error: error.message}) 
@@ -101,7 +101,7 @@ app.get("/api/promoted", async (req, res)=>{
 app.get("/api/payedpromotion", async (req, res)=>{
    const data = await Payed.find()
    try {
-       console.log(data);
+       
        res.json(data);
    } catch (error) {
       res.status(404).json({error: error.message}) 
