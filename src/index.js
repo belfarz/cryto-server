@@ -110,11 +110,10 @@ app.get("/api/payedpromotion", async (req, res)=>{
 
 app.post('/api/coins', async (req, res) => {
    try {
-     const { payedUrl } = req.body; // Extracting payedUrl from the request body
-      const url = payedUrl ? `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${payedUrl}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en` : null;
+     const { payedUrl } = req.body; // Extracting payedUrl from the request body;
      // Make a call to another API using axios
-     console.log(url)
-     const response = await axios.get(url);
+     console.log(payedUrl)
+     const response = await axios.get(payedUrl);
  
      // Sending the response from the other API back to the client
 
