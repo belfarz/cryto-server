@@ -1,10 +1,12 @@
  const express = require("express");
+ const axios = require('axios');
  const mongoose = require("mongoose");
  const Customer = require("./models/custormer");
  const User = require("./models/users")
  const Payed = require("./models/payed")
  const cors = require('cors');
  const bcrypt = require('bcrypt')
+
 
  const app = express();
  app.use(cors());
@@ -105,6 +107,21 @@ app.get("/api/payedpromotion", async (req, res)=>{
       res.status(404).json({error: error.message}) 
    }
 })
+
+app.post('/api/coins', async (req, res) => {
+   try {
+     const { payedUrl } = req.body; // Extracting payedUrl from the request body
+      const url = payedUrl ? `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${payedUrl}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en` : null;
+     // Make a call to another API using axios
+     const response = await axios.get(url);
+ 
+     // Sending the response from the other API back to the client
+     res.status(200).json(response.data);
+   } catch (error) {
+     console.error(error);
+     res.status(500).json({ error: 'Internal Server Error' });
+   }
+ });
 
 
 
