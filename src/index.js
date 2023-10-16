@@ -124,6 +124,24 @@ app.post('/api/coins', async (req, res) => {
    }
  });
 
+ app.post('/api/coinmarketcap', async (req, res) => {
+
+   try {
+     const { coinIds } = req.body; // Extract coin IDs from the request body
+     console.log(coinIds)
+     const response = await axios.get(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?slug=${coinIds}`, {
+       headers: {
+         'X-CMC_PRO_API_KEY': 'f14de90f-4965-4528-8a0f-b41e916cbcf8', // Replace with your actual CoinMarketCap API key
+   
+    },
+     });
+ 
+     res.json(response.data);
+   } catch (error) {
+     console.error(error.message);
+     res.status(500).send('Internal Server Error');
+   }
+ });
 
 
 app.post('/', (req, res)=>{
