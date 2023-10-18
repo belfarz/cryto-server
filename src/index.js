@@ -107,7 +107,7 @@ app.get("/api/payedpromotion", async (req, res)=>{
       res.status(404).json({error: error.message}) 
    }
 })
-
+//----------------------------------------------------------------------------------------------------
 app.post('/api/coins', async (req, res) => {
    try {
      const { payedUrl } = req.body; // Extracting payedUrl from the request body;
@@ -123,6 +123,7 @@ app.post('/api/coins', async (req, res) => {
      res.status(500).json({ error: 'Internal Server Error' });
    }
  });
+ //----------------------------------------------------------------------------------------------------
 
  app.post('/api/coinmarketcap', async (req, res) => {
 
@@ -132,7 +133,7 @@ app.post('/api/coins', async (req, res) => {
      const response = await axios.get(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?slug=${coinIds}`, {
        headers: {
          'X-CMC_PRO_API_KEY': 'f14de90f-4965-4528-8a0f-b41e916cbcf8', // Replace with your actual CoinMarketCap API key
-   
+         "skip_invalid" : true
     },
      });
  
