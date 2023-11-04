@@ -26,6 +26,12 @@
 
 app.post('/api/customers', async (req, res)=>{
    console.log(req.body);
+   const { coinId } = req.body
+   console.log(coinId);
+   const findUser = await Customer.findOne({ coinId });
+   if(findUser != null){
+      return res.status(400).send('Coin Already exist')
+   }
    const customer = new Customer(req.body);
    try {
       await customer.save();
