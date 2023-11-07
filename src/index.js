@@ -26,7 +26,7 @@
 
 app.post('/api/customers', async (req, res)=>{
    console.log(req.body);
-   const { coinId } = req.body
+   const { coinId } = req.body;
    console.log(coinId);
    const findUser = await Customer.findOne({ coinId });
    if(findUser != null){
