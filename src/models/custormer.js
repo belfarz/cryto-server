@@ -8,6 +8,10 @@ const customerSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true
+    },
+    chain: {
+        type: String,
+        required: true
     }
 });
 
