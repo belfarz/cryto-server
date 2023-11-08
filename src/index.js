@@ -26,7 +26,7 @@
 
 app.post('/api/customers', async (req, res)=>{
    console.log(req.body);
-   const { coinId } = req.body;
+   const { coinId } = req.body
    console.log(coinId);
    const findUser = await Customer.findOne({ coinId });
    if(findUser != null){
@@ -53,6 +53,18 @@ app.post('/api/payed', async (req, res)=>{
    }
 
 });
+
+app.get("/api/coindetails/:id",async (req, res) => {
+   const userId = req.params.id;
+   try {
+      // console.log(undefinedVariable);
+       const user = await Customer.findOne({"coinId": userId});
+       res.json(user);
+   } catch (error) {
+       res.status(404).json({error: error.message})  
+   }
+
+ });
 
 app.post('/api/login', async (req, res)=>{
    
