@@ -23,7 +23,7 @@
 
  const PORT = process.env.PORT || 3000;
 
-
+ //----------------------------------------------------------------------------------------------------
 app.post('/api/customers', async (req, res)=>{
    console.log(req.body);
    const { coinId } = req.body
@@ -41,7 +41,7 @@ app.post('/api/customers', async (req, res)=>{
    }
 
 });
-
+ //----------------------------------------------------------------------------------------------------
 app.post('/api/payed', async (req, res)=>{
    console.log(req.body);
    const payed = new Payed(req.body);
@@ -53,7 +53,7 @@ app.post('/api/payed', async (req, res)=>{
    }
 
 });
-
+ //----------------------------------------------------------------------------------------------------
 app.get("/api/coindetails/:id",async (req, res) => {
    const userId = req.params.id;
    try {
@@ -65,7 +65,7 @@ app.get("/api/coindetails/:id",async (req, res) => {
    }
 
  });
-
+ //----------------------------------------------------------------------------------------------------
 app.post('/api/login', async (req, res)=>{
    
    const {email , password} = req.body
@@ -91,7 +91,7 @@ app.post('/api/login', async (req, res)=>{
    }
 
 });
-
+ //----------------------------------------------------------------------------------------------------
 app.post('/api/register', async (req, res)=>{
    
    try {
@@ -105,7 +105,7 @@ app.post('/api/register', async (req, res)=>{
    }
 
 });
-
+ //----------------------------------------------------------------------------------------------------
 app.get("/api/promoted", async (req, res)=>{
    const data = await Customer.find()
    try {
@@ -115,7 +115,7 @@ app.get("/api/promoted", async (req, res)=>{
       res.status(404).json({error: error.message}) 
    }
 })
-
+ //----------------------------------------------------------------------------------------------------
 app.get("/api/payedpromotion", async (req, res)=>{
    const data = await Payed.find()
    try {
@@ -143,14 +143,27 @@ app.post('/api/coins', async (req, res) => {
  });
  //----------------------------------------------------------------------------------------------------
 
+ app.get("/api/latest", async (req, res) =>{
+   try {
+      const response = await axios.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest", {
+       headers: {
+         'X-CMC_PRO_API_KEY': 'f14de90f-4965-4528-8a0f-b41e916cbcf8'
+      },
+     });
+ 
+     res.json(response.data.data);
+   } catch (error) {
+      res.status(404).json({error: error.message}) 
+   }
+ });
+ //----------------------------------------------------------------------------------------------------
  app.post('/api/coinmarketcap', async (req, res) => {
-
    try {
      const { coinIds } = req.body; // Extract coin IDs from the request body
      console.log("hello"+coinIds)
      const response = await axios.get(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?slug=${coinIds}`, {
        headers: {
-         'X-CMC_PRO_API_KEY': 'f14de90f-4965-4528-8a0f-b41e916cbcf8', // Replace with your actual CoinMarketCap API key
+         'X-CMC_PRO_API_KEY': 'f14de90f-4965-4528-8a0f-b41e916cbcf8', 
          "skip_invalid" : true
     },
      });
@@ -161,7 +174,7 @@ app.post('/api/coins', async (req, res) => {
      res.status(500).send('Internal Server Error');
    }
  });
-
+ //----------------------------------------------------------------------------------------------------
  app.post('/api/metadata', async (req, res) => {
 
    try {
@@ -169,7 +182,7 @@ app.post('/api/coins', async (req, res) => {
      console.log("hello"+coinIds)
      const response = await axios.get(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?slug=${coinIds}`, {
        headers: {
-         'X-CMC_PRO_API_KEY': 'f14de90f-4965-4528-8a0f-b41e916cbcf8', // Replace with your actual CoinMarketCap API key
+         'X-CMC_PRO_API_KEY': 'f14de90f-4965-4528-8a0f-b41e916cbcf8', 
          "skip_invalid" : true
     },
      });
@@ -181,7 +194,7 @@ app.post('/api/coins', async (req, res) => {
    }
  });
 
-
+ //----------------------------------------------------------------------------------------------------
 app.post('/', (req, res)=>{
    res.send("hello belfarz post!!");
 });
