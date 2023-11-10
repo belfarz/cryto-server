@@ -157,6 +157,22 @@ app.post('/api/coins', async (req, res) => {
    }
  });
  //----------------------------------------------------------------------------------------------------
+ app.get("/api/address/:id", async (req, res) =>{
+   try {
+      const address = req.params.id
+      const response = await axios.get(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?address=${address}`, {
+       headers: {
+         'X-CMC_PRO_API_KEY': 'f14de90f-4965-4528-8a0f-b41e916cbcf8'
+      },
+     });
+     const dataKeys = Object.keys(response.data.data);
+     res.json(dataKeys);
+   } catch (error) {
+      res.status(404).json({error: error.message}) 
+   }
+ });
+
+ //----------------------------------------------------------------------------------------------------
  app.post('/api/coinmarketcap', async (req, res) => {
    try {
      const { coinIds } = req.body; // Extract coin IDs from the request body
