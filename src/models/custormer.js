@@ -12,6 +12,10 @@ const customerSchema = new mongoose.Schema({
     chain: {
         type: String,
         required: true
+    },
+    cmc_id: {
+        type: String,
+        required: true 
     }
 });
 
