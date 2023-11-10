@@ -165,8 +165,8 @@ app.post('/api/coins', async (req, res) => {
          'X-CMC_PRO_API_KEY': 'f14de90f-4965-4528-8a0f-b41e916cbcf8'
       },
      });
-     const dataKeys = Object.keys(response.data.data);
-     res.json(dataKeys);
+    
+     res.json(response.data.data);
    } catch (error) {
       res.status(404).json({error: error.message}) 
    }
