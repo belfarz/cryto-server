@@ -177,7 +177,7 @@ app.post('/api/coins', async (req, res) => {
    try {
      const { coinIds } = req.body; // Extract coin IDs from the request body
      console.log("hello"+coinIds)
-     const response = await axios.get(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?slug=${coinIds}`, {
+     const response = await axios.get(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?id=${coinIds}`, {
        headers: {
          'X-CMC_PRO_API_KEY': 'f14de90f-4965-4528-8a0f-b41e916cbcf8', 
          "skip_invalid" : true
@@ -196,7 +196,7 @@ app.post('/api/coins', async (req, res) => {
    try {
      const { coinIds } = req.body; // Extract coin IDs from the request body
      console.log("hello"+coinIds)
-     const response = await axios.get(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?slug=${coinIds}`, {
+     const response = await axios.get(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?id=${coinIds}`, {
        headers: {
          'X-CMC_PRO_API_KEY': 'f14de90f-4965-4528-8a0f-b41e916cbcf8', 
          "skip_invalid" : true

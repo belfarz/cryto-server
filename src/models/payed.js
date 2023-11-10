@@ -8,6 +8,14 @@ const customerSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true
+    },
+    chain: {
+        type: String,
+        required: true
+    },
+    cmc_id: {
+        type: String,
+        required: true 
     }
 });
 
