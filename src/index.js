@@ -30,7 +30,7 @@ app.post('/api/customers', async (req, res)=>{
    console.log(coinId);
    const findUser = await Customer.findOne({ coinId });
    if(findUser != null){
-      return res.status(400).send('Coin Already exist')
+      return res.send('Coin Already exist')
    }
    const customer = new Customer(req.body);
    try {
