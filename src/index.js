@@ -58,7 +58,9 @@ app.get("/api/coindetails/:id",async (req, res) => {
    const userId = req.params.id;
    try {
       // console.log(undefinedVariable);
-       const user = await Customer.findOne({"coinId": userId});
+       const option1 = await Customer.findOne({"coinId": userId});
+       const option2 = await Payed.findOne({"coinId": userId});
+       const user = option1 ? option1 : option2
        res.json(user);
    } catch (error) {
        res.status(404).json({error: error.message})  
