@@ -54,12 +54,12 @@ app.post('/api/payed', async (req, res)=>{
 
 });
  //----------------------------------------------------------------------------------------------------
-app.get("/api/coindetails/:id",async (req, res) => {
-   const userId = req.params.id;
+app.get("/api/coindetails/:id",async (req, res) => {                                                     
+   const cmc_id = req.params.id;
    try {
       // console.log(undefinedVariable);
-       const option1 = await Customer.findOne({"coinId": userId});
-       const option2 = await Payed.findOne({"coinId": userId});
+       const option1 = await Customer.findOne({"cmc_id": cmc_id});
+       const option2 = await Payed.findOne({"cmc_id": cmc_id});
        const user = option1 ? option1 : option2
        res.json(user);
    } catch (error) {
